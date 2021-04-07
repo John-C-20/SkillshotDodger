@@ -1,47 +1,106 @@
+import Enemy from './enemy';
+import Player from './player'
+import Attack from "./attack";
+
 document.addEventListener("DOMContentLoaded", function () {
     const canvas = document.getElementById("game-canvas");
-    canvas.width = 1000;
-    canvas.height = 1000;
+    canvas.width = 500;
+    canvas.height = 500;
     canvas.addEventListener('mousedown', movePlayer)
     setInterval(play, 1000/100);
 
     // e.clientX - canvas.offsetLeft // gives x coordinate of canvas
     // e.clientY - canvas.offsetTop // gives y coordinate of canvas
 
-    playerX = playerY = 500
-    mouseX = mouseY = 500
+    let player = new Player()
+    // player.x = 500
+    // player.y = 500
+    let mouseX = 250
+    let mouseY = 250
+
+    let enemy1 = new Enemy()
+    let enemy2 = new Enemy()
+    let enemy3 = new Enemy()
+    let enemy4 = new Enemy()
+    let enemy5 = new Enemy()
+    
+    let enemies = [enemy1, enemy2, enemy3, enemy4, enemy5]
+
+    let counter = 0
+    let attacks = []
 
     function movePlayer(e) {
         mouseX = e.clientX - canvas.offsetLeft
         mouseY = e.clientY - canvas.offsetTop
+        let deltaX = Math.abs(mouseX - player.x)
+        let deltaY = Math.abs(mouseY - player.y)
+        let hypo = Math.sqrt(deltaX*deltaX + deltaY*deltaY)
+        player.xVelocity = deltaX / hypo
+        player.yVelocity = deltaY / hypo
     }
 
     function play() {
+        if (counter === 500) counter = 0;
+    
         const ctx = canvas.getContext("2d");
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-        if (playerX < mouseX) {
-            playerX++ 
+        if (player.x < mouseX) {
+            player.x+= player.xVelocity
         } 
-        if (playerX > mouseX) {
-            playerX-- 
+        if (player.x > mouseX) {
+            player.x-= player.xVelocity 
         } 
-        if (playerY < mouseY) {
-            playerY++ 
+        if (player.y < mouseY) {
+            player.y+= player.yVelocity 
         } 
-        if (playerY > mouseY) {
-            playerY-- 
+        if (player.y > mouseY) {
+            player.y-= player.yVelocity 
         } 
         
+
+        // draw player
         ctx.beginPath();
-        ctx.arc(playerX, playerY, 20, 0, 2 * Math.PI, true);
-        // x, y, size, ? , circumference, ?
+        ctx.arc(player.x, player.y, 20, 0, 2 * Math.PI, true);
         ctx.strokeStyle = "green";
         ctx.lineWidth = 5;
         ctx.stroke();
         ctx.fillStyle = "blue";
         ctx.fill();
+
+
+        // draw each enemy
+        enemies.forEach(enemy => {
+            ctx.beginPath();
+            ctx.arc(enemy.x, enemy.y, 20, 0, 2 * Math.PI, true);
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            ctx.fillStyle = "red";
+            ctx.fill();
+
+            if (enemy.interval === counter) {
+                attacks.push(new Attack(enemy.x, enemy.y, player.x, player.y, enemy.speed)) 
+            }
+        })
+
+        attacks.forEach(attack => {
+            attack.move() 
+            ctx.beginPath();
+            ctx.arc(attack.x, attack.y, 10, 0, 2*Math.PI, true);
+            ctx.strokeStyle = "orange";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+
+            let deltaX = Math.abs(attack.x - player.x)
+            let deltaY = Math.abs(attack.y - player.y)
+            if (deltaX <= 20 && deltaY <= 20) alert('game over! refresh page to try again');
+        })
+
+        counter += 1
     }
 
 });
