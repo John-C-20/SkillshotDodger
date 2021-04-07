@@ -1,3 +1,17 @@
+body {
+  text-align: center;
+  background: url(images/SR.jpeg) no-repeat center fixed;
+  background-size: cover;
+  color: #fff;
+}
 
+#gameOver, #timer {
+  font-size: 24px;
+  font-weight: 600;
+}
 
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZVJvb3QiOiIifQ==*/
+#game-canvas {
+  border-radius: 20px;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9pbmRleC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0k7RUFDQTtFQUNBO0VBQ0E7QUFDSjs7QUFFQTtFQUNJO0VBQ0E7QUFDSjs7QUFFQTtFQUNJO0FBQ0osQyIsImZpbGUiOiJtYWluLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJvZHkge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBiYWNrZ3JvdW5kOiB1cmwoXCIuLi9hc3NldHMvU1IuanBlZ1wiKSBuby1yZXBlYXQgY2VudGVyIGZpeGVkO1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gICAgY29sb3I6ICNmZmZcbn1cblxuI2dhbWVPdmVyLCAjdGltZXIge1xuICAgIGZvbnQtc2l6ZTogMjRweDtcbiAgICBmb250LXdlaWdodDogNjAwO1xufVxuXG4jZ2FtZS1jYW52YXMge1xuICAgIGJvcmRlci1yYWRpdXM6IDIwcHg7XG59Il0sInNvdXJjZVJvb3QiOiIifQ==*/
